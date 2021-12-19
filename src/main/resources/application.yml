@@ -1,0 +1,5 @@
+couchbase:
+  host: host.docker.internal
+  bucket:
+    name: "reviews"
+    password: "123qwe"
