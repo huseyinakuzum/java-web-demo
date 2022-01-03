@@ -1,0 +1,46 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: maven
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+    - name: Beanstalk Deploy
+      # You may pin to the exact commit or the version.
+      # uses: einaregilsson/beanstalk-deploy@6f594ded1b0a22c5e5aa1088e7c58dc5816c92ea
+      uses: einaregilsson/beanstalk-deploy@v20
+      with:
+        # AWS Access Key
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        # AWS Secret Key
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        # AWS Session Token when using temporary security credentials such as when assuming a role in AWS through STS
+        # AWS Region
+        region: ""
+        # Beanstalk application name
+        application_name: ""
+        # Beanstalk environment name. If empty a version will be created but not deployed anywhere.
+        version_label: ""
+        # Version description for the new Beanstalk version
+    
+
+
