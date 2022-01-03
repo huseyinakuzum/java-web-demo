@@ -1,0 +1,24 @@
+management:
+  endpoints:
+    web:
+      base-path: /_monitoring
+  endpoint:
+    health:
+      enabled: true
+  server:
+    port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/javademo
+    username: user
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: update
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    database: postgresql
+    show-sql: true
