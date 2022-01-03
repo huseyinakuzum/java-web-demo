@@ -10,9 +10,9 @@ management:
 
 spring:
   datasource:
-    url: ${AWS_POSTGRES_URL}
-    username: ${AWS_POSTGRES_USER}
-    password: ${AWS_POSTGRES_PASSWORD}
+    url: ${{secrets.AWS_POSTGRES_URL}}
+    username: ${{secrets.AWS_POSTGRES_USER}}
+    password: ${{secrets.AWS_POSTGRES_PASSWORD}}
   jpa:
     properties:
       hibernate:
