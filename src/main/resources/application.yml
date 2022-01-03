@@ -1,5 +1,24 @@
-couchbase:
-  host: host.docker.internal
-  bucket:
-    name: "reviews"
-    password: "123qwe"
+management:
+  endpoints:
+    web:
+      base-path: /_monitoring
+  endpoint:
+    health:
+      enabled: true
+  server:
+    port: 8080
+
+spring:
+  datasource:
+    url: ${AWS_POSTGRES_URL}
+    username: ${AWS_POSTGRES_USER}
+    password: ${AWS_POSTGRES_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        ddl-auto: update
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    database: postgresql
+    show-sql: true

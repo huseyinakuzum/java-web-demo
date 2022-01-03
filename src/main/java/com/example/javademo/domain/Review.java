@@ -1,33 +1,72 @@
 package com.example.javademo.domain;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.couchbase.core.mapping.Document;
-import org.springframework.data.couchbase.core.mapping.Field;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
-@Document
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
 public class Review {
 
     @Id
-    String Id;
+    @SequenceGenerator(name = "review_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "review_seq")
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @Column(name = "user_id")
     Long userId;
+
+    @Column(name = "content_id")
     String contentId;
-    @Field
+
+    @Column(name = "rate")
     Integer rate;
+
+    @Column(name = "comment")
     String comment;
+
+    @Column(name = "username")
     String userName;
+
+    @Column(name = "review_status")
     String reviewStatus;
-    Long createDate;
-    Long lastModifiedDate;
 
-    public Review() {
+    @Column(name = "deleted", columnDefinition = "Bit(1) default false")
+    private boolean deleted = false;
+
+    @CreatedDate
+    @Column(name = "created_date", nullable = false, updatable = false)
+    Date createDate;
+
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    Date lastModifiedDate;
+
+
+    @PrePersist
+    protected void prePersist() {
+        if (this.createDate == null) createDate = new Date();
+        if (this.lastModifiedDate == null) lastModifiedDate = new Date();
     }
 
-    public String getId() {
-        return Id;
+    @PreUpdate
+    protected void preUpdate() {
+        this.lastModifiedDate = new Date();
     }
 
-    public void setId(String id) {
-        Id = id;
+    @PreRemove
+    protected void preRemove() {
+        this.lastModifiedDate = new Date();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getUserId() {
@@ -78,19 +117,27 @@ public class Review {
         this.reviewStatus = reviewStatus;
     }
 
-    public Long getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Long createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
-    public Long getLastModifiedDate() {
+    public Date getLastModifiedDate() {
         return lastModifiedDate;
     }
 
-    public void setLastModifiedDate(Long lastModifiedDate) {
+    public void setLastModifiedDate(Date lastModifiedDate) {
         this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

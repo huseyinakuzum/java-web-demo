@@ -5,8 +5,6 @@ import com.example.javademo.model.ReviewDTO;
 import com.example.javademo.service.ReviewService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/reviews")
 public class ReviewController {
@@ -18,17 +16,12 @@ public class ReviewController {
     }
 
     @GetMapping("/id/{reviewId}")
-    public ReviewDTO getReview(@PathVariable String reviewId) {
+    public ReviewDTO getReview(@PathVariable Integer reviewId) {
         return reviewService.findById(reviewId);
     }
 
-    @GetMapping("/rate/{rate}")
-    public List<ReviewDTO> findByRate(@PathVariable Integer rate) {
-        return reviewService.findByRate(rate);
-    }
-
     @PostMapping
-    public String createReview(@RequestBody CreateReviewRequest request) {
+    public Long createReview(@RequestBody CreateReviewRequest request) {
         return reviewService.createReview(request);
     }
 }

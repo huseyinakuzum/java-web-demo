@@ -1,18 +1,18 @@
 package com.example.javademo.model;
 
 public class ReviewDTO {
-    String Id;
+    Long Id;
     Long UserId;
     String ContentId;
     Integer Rate;
     String Comment;
     String UserName;
 
-    public String getId() {
+    public Long getId() {
         return Id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         Id = id;
     }
 

@@ -7,10 +7,7 @@ import com.example.javademo.repository.ReviewRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -21,7 +18,7 @@ public class ReviewService {
         this.reviewRepository = reviewRepository;
     }
 
-    public ReviewDTO findById(String id) {
+    public ReviewDTO findById(Integer id) {
         ReviewDTO reviewDTO = new ReviewDTO();
         Optional<Review> optionalReview = reviewRepository.findById(id);
         if (optionalReview.isPresent()) {
@@ -30,24 +27,14 @@ public class ReviewService {
         return reviewDTO;
     }
 
-    public List<ReviewDTO> findByRate(Integer rate) {
-        return reviewRepository.findAllByRateEquals(rate).stream()
-                .map(this::convertReview)
-                .collect(Collectors.toList());
-    }
-
-    public String createReview(CreateReviewRequest request) {
+    public Long createReview(CreateReviewRequest request) {
         Review review = new Review();
-        String id = UUID.randomUUID().toString();
-        review.setId(id);
         review.setComment(request.getComment());
         review.setContentId(request.getContentId());
         review.setUserId(request.getUserId());
         review.setUserName(request.getUserName());
-        review.setCreateDate(Instant.now().toEpochMilli());
-        review.setLastModifiedDate(Instant.now().toEpochMilli());
-        reviewRepository.save(review);
-        return id;
+        Review savedReview = reviewRepository.save(review);
+        return savedReview.getId();
     }
 
     private ReviewDTO convertReview(Review review) {
