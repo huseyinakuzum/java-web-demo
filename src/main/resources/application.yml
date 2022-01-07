@@ -5,21 +5,20 @@ management:
   endpoint:
     health:
       enabled: true
-  server:
-    port: 5000
-spring:
-  datasource:
-    url: ${{secrets.AWS_POSTGRES_URL}}
-    username: ${{secrets.AWS_POSTGRES_USER}}
-    password: ${{secrets.AWS_POSTGRES_PASSWORD}}
-  jpa:
-    properties:
-      hibernate:
-        ddl-auto: update
-        jdbc:
-          lob:
-            non_contextual_creation: true
-    database: postgresql
-    show-sql: true
+
+#spring:
+#  datasource:
+#    url: ${{secrets.AWS_POSTGRES_URL}}
+#    username: ${{secrets.AWS_POSTGRES_USER}}
+#    password: ${{secrets.AWS_POSTGRES_PASSWORD}}
+#  jpa:
+#    properties:
+#      hibernate:
+#        ddl-auto: update
+#        jdbc:
+#          lob:
+#            non_contextual_creation: true
+#    database: postgresql
+#    show-sql: true
 server:
-  port: 5000
+  port: 8080
