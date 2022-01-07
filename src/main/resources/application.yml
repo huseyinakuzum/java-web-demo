@@ -7,7 +7,6 @@ management:
       enabled: true
   server:
     port: 5000
-
 spring:
   datasource:
     url: ${{secrets.AWS_POSTGRES_URL}}
@@ -22,3 +21,5 @@ spring:
             non_contextual_creation: true
     database: postgresql
     show-sql: true
+server:
+  port: 5000
