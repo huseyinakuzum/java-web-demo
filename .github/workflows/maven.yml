@@ -127,6 +127,6 @@ jobs:
           use_existing_version_if_available: false
           application_name: demo-java
           environment_name: Demojava-env
-          version_label: ${{github.SHA}}
+          version_label: java-demo-${{github.SHA}}
           region: us-east-1
           deployment_package: java-demo-0.0.1-SNAPSHOT.war
