@@ -126,7 +126,6 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           use_existing_version_if_available: false
           application_name: demo-java
-          environment_name: demo-java-env
           version_label: ${{github.SHA}}
           region: us-east-1
           deployment_package: java-demo-0.0.1-SNAPSHOT.war
