@@ -39,8 +39,10 @@ jobs:
         # Beanstalk application name
         application_name: demo-java
         # Beanstalk environment name. If empty a version will be created but not deployed anywhere.
-        version_label: demo-java-${{ steps.format-time.outputs.replaced }}
+        version_label: ${{github.SHA}}
         # Version description for the new Beanstalk version
+        deployment_package: java-demo-0.0.1-SNAPSHOT.war
+
     
 
 
