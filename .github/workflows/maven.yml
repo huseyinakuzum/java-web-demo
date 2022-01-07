@@ -39,7 +39,7 @@ jobs:
         # Beanstalk application name
         application_name: demo-java
         # Beanstalk environment name. If empty a version will be created but not deployed anywhere.
-        version_label: "version"
+        version_label: demo-java-${{ steps.format-time.outputs.replaced }}
         # Version description for the new Beanstalk version
     
 
