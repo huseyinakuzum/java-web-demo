@@ -32,7 +32,7 @@ public class ReviewService {
 
     private ReviewDTO convertReview(Review review) {
         ReviewDTO reviewDTO = new ReviewDTO();
-//        reviewDTO.setId(review.getId());
+        reviewDTO.setId(1L);
 //        reviewDTO.setComment(review.getComment());
 //        reviewDTO.setRate(review.getRate());
 //        reviewDTO.setContentId(review.getContentId());
